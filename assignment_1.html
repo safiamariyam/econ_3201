@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.6.42">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Assignment 1</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="assignment_1_files/libs/clipboard/clipboard.min.js"></script>
+<script src="assignment_1_files/libs/quarto-html/quarto.js"></script>
+<script src="assignment_1_files/libs/quarto-html/popper.min.js"></script>
+<script src="assignment_1_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="assignment_1_files/libs/quarto-html/anchor.min.js"></script>
+<link href="assignment_1_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="assignment_1_files/libs/quarto-html/quarto-syntax-highlighting-2f5df379a58b258e96c21c0638c20c03.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="assignment_1_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="assignment_1_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="assignment_1_files/libs/bootstrap/bootstrap-c0367b04c37547644fece4185067e4a7.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="fullcontent">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Assignment 1</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="latex" class="level2">
+<h2 class="anchored" data-anchor-id="latex">2. LaTeX</h2>
+<ol type="a">
+<li><p><span class="math inline">\(E(Y) = y_1 p_1 + ... + y_k p_k = \sum_{i=1}^k y_i p_i\)</span></p></li>
+<li><p><span class="math inline">\(\sigma_y = Var(Y) = E[(Y-\mu_y)^2] = \sum_{i=1}^k (y_i - \mu_y)^2 p_i\)</span></p></li>
+<li><p><span class="math inline">\(\hat{\beta} = \frac{\sum_{i=1}^n (y-y_i)(x-x_i)}{\sum_{i-1}^n (x-x_i)^2}\)</span></p></li>
+<li><p><span class="math inline">\(P(a \leq Y \leq b) = \int_{a}^{b} f_y (y)dy\)</span></p></li>
+<li><p><span class="math inline">\(\hat{g}(x) = \frac{\frac{1}{nh} \sum_{i=1}^n y_ik(\frac{x_i-x}{n})}{\frac{1}{nh} \sum_{i=1}^n k(\frac{x_i-x}{n})}\)</span></p></li>
+</ol>
+</section>
+<section id="r" class="level2">
+<h2 class="anchored" data-anchor-id="r">3. R</h2>
+<ol type="a">
+<li></li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">1000</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ol start="2" type="a">
+<li></li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>u_1 <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="dv">500</span>,<span class="dv">0</span>,<span class="dv">1</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>u_2 <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="dv">500</span>,<span class="dv">0</span>,<span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ol start="3" type="a">
+<li></li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>z_1 <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(<span class="sc">-</span><span class="dv">2</span> <span class="sc">*</span> <span class="fu">log</span>(u_1)) <span class="sc">*</span> <span class="fu">cos</span>(<span class="dv">2</span> <span class="sc">*</span> pi <span class="sc">*</span> u_2)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>z_2 <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(<span class="sc">-</span><span class="dv">2</span> <span class="sc">*</span> <span class="fu">log</span>(u_1)) <span class="sc">*</span> <span class="fu">sin</span>(<span class="dv">2</span> <span class="sc">*</span> pi <span class="sc">*</span> u_2)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>z_1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  [1]  0.3026800626 -1.5034638746  0.9720558155  0.9229164518  0.6515501901
+  [6] -0.5809135476  0.4314699091 -0.5683140058  0.0577298441  0.2535479080
+ [11] -0.0664973811 -0.3812322557 -0.4643207801 -0.5042512829  1.3846064817
+ [16]  0.9474269194 -1.0475211982 -0.2091728263  0.5085251575 -1.5532283647
+ [21]  1.6732516328 -0.4451890545 -0.7196474962  1.9225944890  0.3259333973
+ [26] -0.1275819851 -0.5392562229  1.4644966803  0.0835023604 -0.2244120456
+ [31] -2.2050271919 -0.3801282462 -0.8961936181  1.0666585513 -0.5852085301
+ [36]  0.6936395846  0.2350986124  0.4344240896  0.8566124182  2.0080820380
+ [41] -0.2991155408  1.2968491902  0.0674899233  0.3823291543  1.5052841250
+ [46] -1.5605569159  0.5184868375  0.1790892991 -1.6168426458 -0.7508577073
+ [51]  0.4735935949 -1.0051907584 -0.3046469563 -0.1196274582 -1.4374925436
+ [56]  1.0727319006  0.4349258546  0.1156745948  0.6593124438  0.8939580296
+ [61] -0.0329965647 -1.3446801234 -0.3157933535 -0.1436641795  0.3169507797
+ [66]  0.8054587857 -0.2755332961 -0.5425178781  1.3127909586 -0.6387868662
+ [71]  0.5744840484 -1.3373945543  0.3045096421 -0.6469941409 -1.3318529085
+ [76] -0.6117633027  1.2987277325 -0.7971244673  0.0566377234  1.5950045199
+ [81]  1.6461584095  0.5504559804 -0.5690965506  0.8504116753 -1.9132093115
+ [86]  1.2796317561  0.3958035817  1.4544213381 -0.1468390998 -0.7499933905
+ [91]  1.5914858233  0.8330713713 -0.4201401832 -1.5199765773 -0.0230631674
+ [96] -0.2732662929 -0.9785513356  0.7728272252 -0.9367561801 -0.5260234605
+[101] -1.1499371148  0.5623491156  2.4423252321  0.0045443113 -0.5855922451
+[106] -1.2449155574  1.6690532856  0.4386717984  0.3694836108  0.9686707949
+[111]  0.8171755813 -0.6432646596 -2.3485830187  0.9372338487  0.4789504568
+[116]  1.3858600772 -0.1177971190 -1.0889987909  1.9883399170  1.3285471435
+[121] -0.5806838927  0.3135979888  1.6079247172 -0.2654246117  0.6152275514
+[126] -1.7421212187 -0.6075913961  0.4096298762 -1.0821566717 -0.2346367318
+[131]  1.2770488858 -0.1463546451 -0.9167044240  0.0973330619  0.4702987252
+[136]  0.3536608113 -2.0398135123  0.4367381560  1.8878131987 -0.1365957953
+[141]  0.6418650770 -0.7405261593 -2.5233902460 -0.5610822065  0.8707082957
+[146] -0.1336823169 -0.4886912241  1.1947590131  0.7871566334  0.1466572184
+[151] -1.4654467505  0.6172756780  0.3849783152  1.1549707032  0.6255103774
+[156] -0.0927963570  0.0636392026  0.9754570602  0.1089756087  1.2571002507
+[161] -1.2498913283  0.1300294198 -0.4202929259  0.9421668095  1.3599644791
+[166]  0.6362803972 -0.9757079279 -0.2820728975  0.1236474820  1.9520915431
+[171] -1.9198385475 -0.2535133832  1.0887798112  0.0984915186  0.2369584462
+[176]  0.5945716673  1.3698343543  0.5716923608  1.6881288350 -0.8357109468
+[181]  0.2108756378 -0.5784630575  1.2910793075  0.3463958393 -0.1982562403
+[186]  0.3282650157 -1.2520678994 -0.2584804759  0.7785053488  1.5808708907
+[191]  1.0712536399  2.0325313897  0.1121461245 -1.4842189205  1.2760452120
+[196] -0.7268115999 -1.1746004713  0.0010186452  0.3758125763  1.2217160131
+[201] -0.0159349193  2.5573834985  3.0881779090  0.6065489413  0.3165530966
+[206] -0.3978936005  1.2953038591  0.3196457606 -1.1450302880  1.2831710723
+[211] -0.1550671744 -0.7643187035 -0.9615079130 -1.4767780299 -0.2756181638
+[216] -1.1018371989  0.3097389061 -0.0003983042 -0.6268547895  0.7102761717
+[221] -1.3585921590  0.4481438408 -0.7035817496  0.0940919394  0.9965783659
+[226] -0.5462402207 -1.5124258375  0.5981541867 -2.1817948727  1.5038101078
+[231] -0.3225457643  1.1008460861  2.2527329943 -0.9979164265  0.6007878522
+[236] -0.4525956746 -1.7160847451  1.6309915576  1.1615817389  1.6328436142
+[241]  2.1936591063 -0.6703397525  0.0239825159  0.5085876174 -0.7970141198
+[246]  0.6405644322 -0.0599825224  1.1228291262 -0.8162504870  0.3810105123
+[251] -0.2400633235  0.1625129197  0.1312321806 -0.5752073431 -1.0409568191
+[256] -0.9609834528 -1.9878457864 -0.1558356175  0.5052335987 -1.2065463980
+[261] -0.2351246337  1.3744984561 -0.0857877001 -0.2914150239  1.2063201091
+[266] -0.1948797280  1.4395460854  0.0323176243  0.1608760191 -0.4975492839
+[271] -0.7983188083  0.9739681064 -0.2219552481 -0.6504332944 -0.3594597541
+[276]  1.1520675940  0.0113806403  0.4785369479 -1.4378427564 -0.1246966251
+[281] -0.7673070235  0.7636010344 -0.7989564373  1.4186678669 -1.5008922146
+[286] -0.8681559508 -2.1969013688 -0.5273308280  0.2067784534 -0.9061241608
+[291]  0.6969315779  2.2415897855 -0.6177910884  0.1588759310 -0.1177357934
+[296]  0.4706914344  1.8390991056 -0.1178551613  0.6059280205 -2.1045767741
+[301] -1.9055389986 -0.6955203951  1.3112717461  0.1858322227 -0.7106755818
+[306]  1.3040323258  0.6357165645  0.0533755652 -0.3988961969  0.3730098852
+[311] -0.4325089208  0.0306101673  1.0167348699 -0.6629732611 -1.1727965768
+[316]  0.7208132358 -0.2382063755 -0.1603613493  0.3949782136 -0.1281916243
+[321]  0.0269550684 -0.6229779153  1.7490552382 -0.0119648497 -0.1017093712
+[326]  0.1383795804 -1.1079211820 -0.5413434633  1.1630414461 -0.0889963223
+[331] -0.4332497105 -0.5082468643 -0.6322871572 -0.5864831240  0.3649905034
+[336] -0.8415393349 -2.1001158042  0.4791818352 -1.1856241029 -1.1053157127
+[341]  2.5650846731  1.4199628110 -1.9541249332  0.0660484167  2.3903233797
+[346]  1.6906599842  0.7533423319 -1.8152583396 -0.3916296537  0.0128381588
+[351]  0.0634831945  0.2031336044 -0.9038843167 -0.5784084850  0.0334567914
+[356] -1.1802485421  0.8682844061  1.5667894035  0.7325966123  0.1240153382
+[361]  2.3538388526  0.3893583345  0.2068965823 -0.7223319381 -0.7190662811
+[366] -0.4764076763  0.1948876611 -0.3705502880 -0.4518409530  0.0153545575
+[371]  0.5121989972  1.0761189358  1.0290317777 -0.3052884511  1.2061532244
+[376] -0.9598505406  1.2359980840  1.4644270947  1.4412048354 -0.4972377901
+[381]  0.4724266941  0.1593520926  0.4345784950 -2.0483590998 -0.8347540583
+[386] -1.8007393311 -1.5162539714 -2.6741088463  0.1553954544  0.6916159258
+[391] -0.0191691541  0.1586313066 -1.4918478942  0.9095169626 -0.9297968933
+[396]  0.3694288976 -0.2088178255  0.3780155539  0.1166436932  0.6952118428
+[401] -0.7054468654  0.6058202002  0.3491395428 -0.1615701684 -1.6806167004
+[406]  0.1249017530  1.0070874337 -0.7617726961  0.8420010480  0.9415952321
+[411] -0.9158935058  0.5257749639 -0.2175247247  1.3843808212  0.9310477295
+[416]  0.5493300078  0.0052954355 -2.4054688981 -0.8220667392 -0.3086973018
+[421]  0.6949973189  1.0754715705 -0.2267036661 -0.5341930819 -1.6193080209
+[426] -0.0645992502  1.6218843467 -0.4441782749  1.2288341427 -0.3577451351
+[431] -0.3007697719 -0.3629789470 -0.9834659640 -1.0009870766 -0.4120848267
+[436] -0.5637201717  1.7520155657  0.4297395738 -0.5226337222 -0.6940628840
+[441] -0.9759712106  1.4562861664  0.5235872331  0.5295869573 -0.2190867155
+[446] -0.7140686737 -1.7101034322 -0.1286317666 -1.8823741156 -1.9052211526
+[451]  0.5594358678  1.0001663159  1.0575946820  0.9807414073  0.4374279668
+[456] -0.8719592103 -0.6256581599  1.0353409019  0.0736521204  1.8589637601
+[461] -1.6564492055  0.8299921579 -0.9211725083 -0.6141976785  0.1967038124
+[466] -0.2933778890 -0.5805704782 -0.8097655129  1.4381187592  1.0492821111
+[471] -0.7323723325 -0.0105365084  0.8533373513  0.0645928046 -0.2314551168
+[476] -0.3994830701 -1.9507578349  0.7277322995 -0.2183068176 -0.3310446320
+[481]  2.0073036230 -1.6626205656 -1.1170628038  0.2836505002 -0.1876231209
+[486]  1.5820036004 -0.3140378130 -1.0268962148 -0.3395383068 -0.2562627975
+[491]  1.5396622549  0.2074729765 -0.6554296316  0.7914110898 -0.6838784509
+[496] -0.2171292125  0.4838516945  1.0559105254  0.8291276631  1.7146698288</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>z_2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  [1]  0.808794266 -0.034744504  1.159282859  0.295901118 -0.511484857
+  [6]  0.676585736  0.976884658  0.825714211 -1.861720063  0.721791329
+ [11]  0.524826990  0.704629141 -0.549535644 -1.459219309  0.110269918
+ [16] -0.550764886 -0.319822828  0.203845315 -1.973057382 -0.724573774
+ [21] -1.809573112  0.502532324 -2.208922191 -0.908423762  0.734981547
+ [26] -0.090379703  0.572907153  0.029428427 -1.092634985 -0.985384055
+ [31]  0.139959174 -0.289496565  0.370149921  0.574523751 -2.574029855
+ [36] -1.297832331  0.129852543 -0.236155957 -0.037421996  0.520690276
+ [41]  0.033940105 -0.414038925 -0.882708704 -0.887638024  0.978459702
+ [46] -0.958889345  1.099663223  0.093184476 -0.692687344 -0.865535029
+ [51] -0.147159171 -0.382690842 -1.541594909 -1.740147744  0.566509263
+ [56] -0.723215806  0.202608081 -1.214512677 -1.336192260  0.887716470
+ [61] -0.472927970 -0.316386557 -1.061348466  0.447571154  1.006731481
+ [66] -0.208492811  0.606283157  0.714301592  0.444935554  2.314766580
+ [71] -0.686329723  1.243001321  2.871530685 -1.612152055 -0.432510356
+ [76] -0.613092558 -0.488411075 -0.482954689 -0.656014863  0.258567849
+ [81]  0.760040107  2.331151142  1.099450040 -0.485481143 -0.464024179
+ [86]  1.115954512 -0.069084711  0.602475549  0.169694579 -1.341656590
+ [91]  1.215565854 -0.015593156  0.244959373 -1.958064120 -0.020904993
+ [96] -1.132090169  0.264243049 -1.208474706 -0.690740279  1.954898429
+[101]  0.917256964  1.239337134 -0.995335174 -1.136983739 -0.664920449
+[106]  0.188138639 -0.768530100  0.410974301 -1.786560452 -0.920319096
+[111]  0.327247941 -0.331212254 -0.628473725  0.200666979 -2.023660530
+[116]  0.095149249 -0.237549061  0.300043373  0.632116115  1.384521029
+[121] -0.614943012  1.484851762  0.492879317 -2.062165038  0.126902971
+[126] -0.155675704  0.429332341 -0.176652760  0.799067803 -0.211688547
+[131] -1.068296733 -0.389165553  2.126934987 -0.309942037 -1.680698504
+[136]  0.755328530 -0.950487452  1.238188661  0.939858624  0.113966584
+[141]  0.325758322  0.837152866 -1.659835602  1.360082595 -1.714645569
+[146] -1.018788387  1.168754808 -1.903108451 -0.118994597  2.876647986
+[151] -0.667450284 -0.227670745  2.377671885 -0.526768955  0.758063194
+[156]  0.583299898  2.001087371  0.488898116 -0.596354519 -1.466827346
+[161]  0.592903343  0.754644661 -0.820499179  0.805840755  0.396751968
+[166] -1.818626263  2.576904406 -0.794078131  1.004772711 -0.338443013
+[171]  2.306766914  0.944486919 -0.941766355 -0.156854722  1.146628642
+[176]  0.527666122 -2.495675635  1.854428477  0.640842571 -0.264135633
+[181]  1.312968313 -1.204743632  2.027679605 -0.846690199  0.236799702
+[186] -0.986281508 -1.728140110  0.518127014 -2.007598093 -0.197192032
+[191] -1.442704256 -0.872061652  0.930518334  0.035391155  2.124907151
+[196] -1.452957625  1.109829966  0.719708446  0.842341339  0.150837559
+[201] -0.229834147  0.772064735 -0.640794255  0.590016818  0.304616956
+[206] -0.221480767  0.255776669 -0.543955503  0.826483086  0.010912218
+[211]  2.335797180  0.361101107  0.241076976 -0.444151935 -0.529336037
+[216]  0.878746890 -1.407654815 -0.564047541  0.234797164  1.463415109
+[221]  0.715232735 -0.273317390 -1.040575379  0.292479195 -1.934768448
+[226] -0.556469355 -0.576742606 -1.279438443 -0.848181676 -0.660562131
+[231]  1.557431297  0.517029064  0.436924353 -0.567581222 -0.014703309
+[236] -1.880031968 -1.409316671 -0.393271180 -0.992247029 -0.947511491
+[241]  0.165125102  1.422161786 -0.380077106 -0.732492350 -0.735272770
+[246]  1.247285213  1.740282787 -1.151138991  0.078815028  1.478951707
+[251] -0.550852301 -0.341169574 -1.772064614 -0.249551245  0.363642842
+[256]  1.280152649  1.373748725  0.575411702 -0.071077976  0.023922898
+[261] -0.999873423 -0.798818947  0.686399277  1.328509646  0.215442273
+[266]  0.724422897 -0.329500858 -0.501030086 -0.217474576  2.012275514
+[271] -1.733585174  1.277584168  1.376338742 -0.289941473  0.665550361
+[276]  0.895934360  0.879322850  0.471001810 -2.310578458 -1.049035527
+[281] -0.012341546 -1.136293329  0.624422422  1.164656245  1.600014422
+[286] -2.090745813  0.410397054 -1.215996665  0.347923961  0.557883500
+[291]  0.511066890  0.990731224 -0.042997063 -0.744355840 -0.063325198
+[296] -1.129790840  0.021296719 -1.375493167 -0.051732641  0.669474672
+[301] -0.117949166 -0.522713145 -0.563793255 -1.295650258 -1.247052801
+[306]  0.167359839 -0.863541175  0.034703006  0.950697076 -1.321828410
+[311]  1.015279067  0.622184676  0.522859060  1.143105147 -0.721865407
+[316]  0.576912087 -0.715754825  0.850643467  0.863281414 -0.135960575
+[321]  0.557368282  1.032508878  1.362024315  0.423147227 -0.669083151
+[326] -0.435339293  0.072896053  0.593433245 -0.123095212 -0.802118684
+[331]  0.548030287  0.140105844 -1.303043514 -0.597654011 -1.078366287
+[336] -0.983383842 -1.439115596  1.614603306 -1.192221163 -0.573705861
+[341] -0.925541642 -0.079803565 -1.455365305 -0.292528995  0.568656291
+[346]  1.121134960 -2.281226546  0.863170689 -1.467548978  1.756321711
+[351] -0.009940352  1.187441908  0.584382562  2.731369091  0.206178627
+[356]  1.452084708 -0.537769058  0.173586225 -0.463629593 -0.785356838
+[361]  1.362535205  0.526280395 -1.026838838  1.276894276  0.517089166
+[366] -0.075096036  1.388605787  2.500865828  0.761989596 -0.768890852
+[371]  1.711898905 -1.316174709 -1.028408356  1.939993522  0.221673836
+[376] -1.275756053  0.399107115  0.490538100  0.109931518  0.846691728
+[381] -2.354316453 -1.111082629 -0.484034695 -0.333868068 -0.076220700
+[386]  1.611859251 -0.125235454 -0.086118576 -1.237275671  0.014995207
+[391]  0.858372353 -0.175220657 -0.826234432  0.138045575 -0.570672235
+[396] -0.179605954 -1.725639493  0.974276125  0.203055368  0.646497727
+[401] -1.030515666 -0.360365155 -0.558613830  1.023653925 -0.156124895
+[406]  0.109454707 -0.465146845 -0.375995994  1.028625996  0.194298341
+[411]  0.107240778 -0.867740090 -0.338428329  2.167721432 -0.595905083
+[416] -0.311440389  0.922819422 -1.280365193 -0.544345648 -1.539419161
+[421]  1.147652802  0.183439822 -0.355862330  0.244518755  1.198895548
+[426] -1.539074165 -0.008970820  0.935015193 -0.512250237 -0.333450139
+[431] -1.847240725  0.952746004  0.409828985  1.921265847  0.455374098
+[436]  2.288610146 -1.592475411 -1.532500707 -0.504051176 -1.188597461
+[441]  0.224284212  1.670176754  1.651329307  0.665564735 -0.251914282
+[446]  1.986006392 -0.887119942  0.644865728 -1.502080248  0.594723340
+[451] -1.610791697 -0.286070254  0.304241914 -1.428219023 -0.879214712
+[456]  0.859569213 -0.796182828  0.299164926  0.256452683 -0.484980168
+[461] -0.871525316 -0.112070704  1.118467208  0.557042606 -0.672548435
+[466] -0.843747049 -2.977668248 -0.030294378 -1.669092243  1.344516344
+[471]  0.298325904  2.103257853  2.275340834  0.310424434 -0.279355443
+[476] -0.530701132 -0.704648566  0.600598042 -0.035865081  0.302260267
+[481] -0.734423037 -0.926834515  0.716894872  0.117161854 -0.955307903
+[486] -0.884018827 -1.841641641 -0.424659855  0.627012111 -0.601608740
+[491] -0.374804666 -0.606107682 -1.328986361  1.734397433 -0.104158448
+[496]  0.329928916 -1.200323690 -0.126348401  0.801248468 -1.393052272</code></pre>
+</div>
+</div>
+<ol start="4" type="a">
+<li></li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>z <span class="ot">&lt;-</span> <span class="fu">c</span>(z_1, z_2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ol start="5" type="a">
+<li></li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>mu <span class="ot">&lt;-</span> <span class="dv">5</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>sigma <span class="ot">&lt;-</span> <span class="dv">2</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> mu <span class="sc">+</span> sigma <span class="sc">*</span> z</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 5.019677</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2.046281</code></pre>
+</div>
+</div>
+<ol start="6" type="a">
+<li></li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(x,</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">freq =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">"Density"</span>,</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"$x$"</span>)</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="fu">curve</span>(<span class="fu">dnorm</span>(x, <span class="at">mean =</span> mu, <span class="at">sd =</span> sigma),</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>      <span class="at">col =</span> <span class="st">"red"</span>, <span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">add =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="assignment_1_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

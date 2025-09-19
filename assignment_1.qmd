@@ -1,0 +1,92 @@
+---
+title: "Assignment 1"
+format: pdf
+editor: visual
+---
+
+## 2. LaTeX
+
+(a) $E(Y) = y_1 p_1 + ... + y_k p_k = \sum_{i=1}^k y_i p_i$
+
+(b) $\sigma_y = Var(Y) = E[(Y-\mu_y)^2] = \sum_{i=1}^k (y_i - \mu_y)^2 p_i$
+
+(c) $\hat{\beta} = \frac{\sum_{i=1}^n (y-y_i)(x-x_i)}{\sum_{i-1}^n (x-x_i)^2}$
+
+(d) $P(a \leq Y \leq b) = \int_{a}^{b} f_y (y)dy$
+
+(e) $\hat{g}(x) = \frac{\frac{1}{nh} \sum_{i=1}^n y_ik(\frac{x_i-x}{n})}{\frac{1}{nh} \sum_{i=1}^n k(\frac{x_i-x}{n})}$
+
+## 3. R
+
+(a) 
+
+```{r}
+n <- 1000 
+
+```
+
+
+(b) 
+
+```{r}
+u_1 <- runif(500,0,1)
+u_2 <- runif(500,0,1)
+
+```
+
+(c)
+
+```{r}
+z_1 <- sqrt(-2 * log(u_1)) * cos(2 * pi * u_2)
+
+z_2 <- sqrt(-2 * log(u_1)) * sin(2 * pi * u_2)
+
+```
+
+
+
+(d)
+
+```{r}
+z <- c(z_1, z_2)
+
+```
+
+
+(e)
+
+```{r}
+mu <- 5
+sigma <- 2
+
+```
+
+(f)
+
+```{r}
+x <- mu + sigma * z
+
+```
+
+
+(g)
+
+```{r}
+mean(x)
+sd(x)
+
+```
+
+
+(h)
+
+```{r}
+hist(x,
+     freq = FALSE,
+     ylab = "Density",
+     xlab = "$x$")
+curve(dnorm(x, mean = mu, sd = sigma),
+      col = "red", lwd = 2, add = TRUE)
+```
+      
+  
