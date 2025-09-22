@@ -16,7 +16,7 @@ editor: visual
 
 (e) $\hat{g}(x) = \frac{\frac{1}{nh} \sum_{i=1}^n y_ik(\frac{x_i-x}{n})}{\frac{1}{nh} \sum_{i=1}^n k(\frac{x_i-x}{n})}$
 
-## 3. R
+## 3.1 R
 
 (a) 
 
@@ -24,7 +24,6 @@ editor: visual
 n <- 1000 
 
 ```
-
 
 (b) 
 
@@ -34,7 +33,7 @@ u_2 <- runif(500,0,1)
 
 ```
 
-(c)
+(c) 
 
 ```{r}
 z_1 <- sqrt(-2 * log(u_1)) * cos(2 * pi * u_2)
@@ -43,17 +42,14 @@ z_2 <- sqrt(-2 * log(u_1)) * sin(2 * pi * u_2)
 
 ```
 
-
-
-(d)
+(d) 
 
 ```{r}
 z <- c(z_1, z_2)
 
 ```
 
-
-(e)
+(e) 
 
 ```{r}
 mu <- 5
@@ -61,15 +57,14 @@ sigma <- 2
 
 ```
 
-(f)
+(f) 
 
 ```{r}
 x <- mu + sigma * z
 
 ```
 
-
-(g)
+(g) 
 
 ```{r}
 mean(x)
@@ -77,8 +72,7 @@ sd(x)
 
 ```
 
-
-(h)
+(h) 
 
 ```{r}
 hist(x,
@@ -88,5 +82,103 @@ hist(x,
 curve(dnorm(x, mean = mu, sd = sigma),
       col = "red", lwd = 2, add = TRUE)
 ```
-      
-  
+
+## 3.2 data frames & indexing
+
+(a) missing values from "Hospital"
+
+```{r}
+cihi <- read.csv("hlthexp.csv")
+
+df <- data.frame(Year = cihi$Year,
+                 Hospitals = cihi$Hospitals,
+                 Physicians = cihi$Physicians,
+                 "Other Services" = cihi$Other.Institutions,
+                 Dental = cihi$Other.Professionals..Dental.Services,
+                 Vision = cihi$Other.Professionals..Vision.Care.Services,
+                 "Other Professionals" = cihi$Other.Professionals..Other.Services,
+                 check.names = FALSE)
+
+```
+
+(b) 
+
+```{r}
+df$TotalOtherServices <- df$Dental + df$Vision + df$"Other Professionals"
+```
+
+(d) 
+
+```{r}
+df<-data.frame(df,PrescriptionDrugs = cihi$Prescribed.Drugs)
+```
+
+(e) 
+
+```{r}
+df$Hospitals[df$Year == 1983]
+```
+
+(f) 
+
+```{r}
+data.frame(df$Year[df$Year>= 2012], df$Hospitals[df$Year>= 2012])
+```
+
+## 3.3 other useful R commands
+
+```{r}
+#install.packages("ggplot2")
+#library(ggplot2)
+
+```
+
+(a) 
+
+```{r}
+mpg <- ggplot2::mpg
+mpg_subset <- subset(mpg, year == 2008)
+min_mpg <- min(mpg_subset$cty)
+max_mpg <- max(mpg_subset$cty)
+```
+
+(b) 
+
+```{r}
+n <- length(mpg_subset$cty)
+avg_mpg <- sum(mpg_subset$cty) / n
+```
+
+
+
+(c) 
+
+```{r}
+avg_mpg_mean <- mean(mpg_subset$cty)
+```
+
+(d) 
+
+```{r}
+compact <- ifelse(mpg$class == "compact", 1, 0)
+```
+
+
+(e)
+```{r}
+avg_mpg_compact <- mean(compact)
+```
+
+(f)
+```{r}
+#| label: fig-mpg
+#| fig-cap: "City Versus Highway Fuel Efficiency (MPG)"
+x <- 1:10
+y <- x^2
+plot(mpg$cty, mpg$hwy, xlab = "City MPG", ylab = "Highway MPG", col = "blue")
+
+```
+
+@fig-mpg shows the fuel eﬀiciency for city driving versus highway driving”.
+
+
